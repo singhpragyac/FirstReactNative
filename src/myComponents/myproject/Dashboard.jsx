@@ -1,11 +1,18 @@
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import AllItems from "./Allitems";
 import CreatePage from "./Createpage";
-import Items from "./Items";
 
 const Dashboard = () => {
   const [view, setView] = useState(0);
-  console.log(setView);
+  const [collections, setCollections] = useState([
+    { id: "1", item: "Rice", stock: "77" },
+    { id: "2", item: "Dal", stock: "7" },
+    { id: "3", item: "Rajma", stock: "12" },
+    { id: "4", item: "Bhindi", stock: "27" },
+    { id: "5", item: "Gobhi", stock: "17" },
+    { id: "6", item: "Beans", stock: "21" },
+  ]);
 
   return (
     <View style={Styles.container}>
@@ -14,7 +21,7 @@ const Dashboard = () => {
         <Pressable
           style={[
             Styles.btn,
-            view === 0 ? { backgroundColor: "rgba(79, 185, 13, 0.47)" } : null,
+            view === 0 ? { backgroundColor: "rgba(34, 224, 16, 0.47)" } : null,
           ]}
           onPress={() => setView(0)}
         >
@@ -24,7 +31,7 @@ const Dashboard = () => {
         <Pressable
           style={[
             Styles.btn,
-            view === 1 ? { backgroundColor: "rgba(79, 185, 13, 0.47)" } : null,
+            view === 1 ? { backgroundColor: "rgba(34, 224, 16, 0.47)" } : null,
           ]}
           onPress={() => setView(1)}
         >
@@ -34,7 +41,7 @@ const Dashboard = () => {
         <Pressable
           style={[
             Styles.btn,
-            view === 2 ? { backgroundColor: "rgba(79, 185, 13, 0.47)" } : null,
+            view === 2 ? { backgroundColor: "rgba(34, 224, 16, 0.47)" } : null,
           ]}
           onPress={() => setView(2)}
         >
@@ -42,9 +49,13 @@ const Dashboard = () => {
         </Pressable>
       </View>
 
-      {view === 0 && <Items />}
-      {view === 1 && <Items />}
-      {view === 2 && <CreatePage />}
+      {view === 0 && <AllItems collections={collections} />}
+      {view === 1 && (
+        <AllItems collections={collections.filter((item) => item.stock < 20)} />
+      )}
+      {view === 2 && (
+        <CreatePage collections={collections} setCollections={setCollections} />
+      )}
     </View>
   );
 };
@@ -75,7 +86,6 @@ const Styles = StyleSheet.create({
     fontSize: 16,
     paddingVertical: 2,
     paddingHorizontal: 10,
-    // backgroundColor: "rgba(156, 225, 156, 0.4)",
   },
 });
 export default Dashboard;

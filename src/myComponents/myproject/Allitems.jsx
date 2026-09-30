@@ -1,15 +1,6 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 
-const collections = [
-  { id: "1", item: "Rice", stock: "77" },
-  { id: "2", item: "Dal", stock: "7" },
-  { id: "3", item: "Rajma", stock: "12" },
-  { id: "4", item: "Bhindi", stock: "27" },
-  { id: "5", item: "Gobhi", stock: "17" },
-  { id: "6", item: "Beans", stock: "21" },
-];
-
-const Items = () => {
+const Items = ({ collections }) => {
   return (
     <View>
       <View style={styles.container}>
@@ -26,7 +17,7 @@ const Items = () => {
               styles.itemContainer,
               {
                 backgroundColor:
-                  item.stock < 20 ? "rgb(237, 86, 86)" : "rgb(123, 219, 71)",
+                  item.stock < 20 ? "rgb(246, 150, 150)" : "rgb(191, 230, 169)",
               },
             ]}
           >
@@ -59,9 +50,10 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     borderWidth: 1,
     borderRadius: 10,
+    borderColor: "rgb(175, 175, 164)",
   },
   item: {
-    // backgroundColor: "red",
+    fontSize: 17,
   },
 });
 
